@@ -58,12 +58,12 @@ const CONTENT: TextStyle = {
   lineHeight: 22,
   marginBottom: spacing[5],
 }
-const CONTINUE: ViewStyle = {
+const BUTTON: ViewStyle = {
   paddingVertical: spacing[4],
   paddingHorizontal: spacing[4],
   backgroundColor: "#5D2555",
 }
-const CONTINUE_TEXT: TextStyle = {
+const BUTTON_TEXT: TextStyle = {
   ...TEXT,
   ...BOLD,
   fontSize: 13,
@@ -77,7 +77,8 @@ const FOOTER_CONTENT: ViewStyle = {
 
 export const WelcomeScreen = observer(function WelcomeScreen() {
   const navigation = useNavigation()
-  const nextScreen = () => navigation.navigate("demo")
+  const demoScreen = () => navigation.navigate("demo")
+  const connectScreen = () => navigation.navigate("connect")
 
   return (
     <View testID="WelcomeScreen" style={FULL}>
@@ -104,10 +105,17 @@ export const WelcomeScreen = observer(function WelcomeScreen() {
         <View style={FOOTER_CONTENT}>
           <Button
             testID="next-screen-button"
-            style={CONTINUE}
-            textStyle={CONTINUE_TEXT}
+            style={BUTTON}
+            textStyle={BUTTON_TEXT}
             tx="welcomeScreen.continue"
-            onPress={nextScreen}
+            onPress={demoScreen}
+          />
+          <Button
+              testID="connect-screen-button"
+              style={BUTTON}
+              textStyle={BUTTON_TEXT}
+              tx="welcomeScreen.connect"
+              onPress={connectScreen}
           />
         </View>
       </SafeAreaView>
