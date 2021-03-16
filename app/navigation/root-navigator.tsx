@@ -20,38 +20,38 @@ import { MainNavigator } from "./main-navigator"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type RootParamList = {
-  mainStack: undefined
+	mainStack: undefined
 }
 
 const Stack = createStackNavigator<RootParamList>()
 
 const RootStack = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="mainStack"
-        component={MainNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  )
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen
+				name="mainStack"
+				component={MainNavigator}
+				options={{
+					headerShown: false,
+				}}
+			/>
+		</Stack.Navigator>
+	)
 }
 
 export const RootNavigator = React.forwardRef<
-  NavigationContainerRef,
-  Partial<React.ComponentProps<typeof NavigationContainer>>
+NavigationContainerRef,
+Partial<React.ComponentProps<typeof NavigationContainer>>
 >((props, ref) => {
-  return (
-    <NavigationContainer {...props} ref={ref}>
-      <RootStack />
-    </NavigationContainer>
-  )
+	return (
+		<NavigationContainer {...props} ref={ref}>
+			<RootStack />
+		</NavigationContainer>
+	)
 })
 
 RootNavigator.displayName = "RootNavigator"

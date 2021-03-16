@@ -1,16 +1,16 @@
 import React from "react"
-import {observer} from "mobx-react-lite"
-import {View, ViewStyle, TextStyle} from "react-native"
-import {Screen, Wallpaper, Header} from "../../components"
-import {useNavigation} from "@react-navigation/native"
-import {color, spacing} from "../../theme"
+import { observer } from "mobx-react-lite"
+import { View, ViewStyle, TextStyle } from "react-native"
+import { Screen, Wallpaper, Header } from "../../components"
+import { useNavigation } from "@react-navigation/native"
+import { color, spacing } from "../../theme"
 
-const FULL: ViewStyle = {flex: 1}
+const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
 	backgroundColor: color.transparent,
 	paddingHorizontal: spacing[4],
 }
-const BOLD: TextStyle = {fontWeight: "bold"}
+const BOLD: TextStyle = { fontWeight: "bold" }
 const HEADER: TextStyle = {
 	paddingTop: spacing[3],
 	paddingBottom: spacing[5] - 1,

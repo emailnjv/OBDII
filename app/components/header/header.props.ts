@@ -2,43 +2,43 @@ import { ViewStyle, TextStyle } from "react-native"
 import { IconTypes } from "../icon/icons"
 
 export interface HeaderProps {
-  /**
+	/**
    * Main header, e.g. POWERED BY IGNITE
    */
-  headerTx?: string
+	headerTx?: string
 
-  /**
+	/**
    * header non-i18n
    */
-  headerText?: string
+	headerText?: string
 
-  /**
+	/**
    * Icon that should appear on the left
    */
-  leftIcon?: IconTypes
+	leftIcon?: IconTypes
 
-  /**
+	/**
    * What happens when you press the left icon
    */
-  onLeftPress?(): void
+	onLeftPress?(): void
 
-  /**
+	/**
    * Icon that should appear on the right
    */
-  rightIcon?: IconTypes
+	rightIcon?: IconTypes
 
-  /**
+	/**
    * What happens when you press the right icon
    */
-  onRightPress?(): void
+	onRightPress?(): void
 
-  /**
+	/**
    * Container style overrides.
    */
-  style?: ViewStyle
+	style?: ViewStyle
 
-  /**
+	/**
    * Title style overrides.
    */
-  titleStyle?: TextStyle
+	titleStyle?: TextStyle
 }

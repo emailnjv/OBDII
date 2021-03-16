@@ -7,5 +7,5 @@ import "./mock-i18n"
 import "./mock-reactotron"
 
 declare global {
-  let __TEST__
+	let __TEST__
 }

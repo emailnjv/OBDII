@@ -11,27 +11,27 @@ import { mergeAll, flatten } from "ramda"
  * This component is a HOC over the built-in React Native one.
  */
 export function Button(props: ButtonProps) {
-  // grab the props
-  const {
-    preset = "primary",
-    tx,
-    text,
-    style: styleOverride,
-    textStyle: textStyleOverride,
-    children,
-    ...rest
-  } = props
+	// grab the props
+	const {
+		preset = "primary",
+		tx,
+		text,
+		style: styleOverride,
+		textStyle: textStyleOverride,
+		children,
+		...rest
+	} = props
 
-  const viewStyle = mergeAll(flatten([viewPresets[preset] || viewPresets.primary, styleOverride]))
-  const textStyle = mergeAll(
-    flatten([textPresets[preset] || textPresets.primary, textStyleOverride]),
-  )
+	const viewStyle = mergeAll(flatten([viewPresets[preset] || viewPresets.primary, styleOverride]))
+	const textStyle = mergeAll(
+		flatten([textPresets[preset] || textPresets.primary, textStyleOverride]),
+	)
 
-  const content = children || <Text tx={tx} text={text} style={textStyle} />
+	const content = children || <Text tx={tx} text={text} style={textStyle} />
 
-  return (
-    <TouchableOpacity style={viewStyle} {...rest}>
-      {content}
-    </TouchableOpacity>
-  )
+	return (
+		<TouchableOpacity style={viewStyle} {...rest}>
+			{content}
+		</TouchableOpacity>
+	)
 }

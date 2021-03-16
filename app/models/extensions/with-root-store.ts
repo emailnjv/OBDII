@@ -6,12 +6,12 @@ import { RootStoreModel } from "../root-store/root-store"
  * and strongly typed way for stores to access other stores.
  */
 export const withRootStore = (self: IStateTreeNode) => ({
-  views: {
-    /**
+	views: {
+		/**
      * The root store.
      */
-    get rootStore() {
-      return getRoot<typeof RootStoreModel>(self)
-    },
-  },
+		get rootStore() {
+			return getRoot<typeof RootStoreModel>(self)
+		},
+	},
 })

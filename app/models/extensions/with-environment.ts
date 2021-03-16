@@ -6,12 +6,12 @@ import { Environment } from "../environment"
  * Environment in strongly typed.
  */
 export const withEnvironment = (self: IStateTreeNode) => ({
-  views: {
-    /**
+	views: {
+		/**
      * The environment.
      */
-    get environment() {
-      return getEnv<Environment>(self)
-    },
-  },
+		get environment() {
+			return getEnv<Environment>(self)
+		},
+	},
 })
