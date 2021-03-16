@@ -23,7 +23,8 @@
     "iosReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app."
   },
   "connectScreen": {
-    "headerText": "CONNECT"
+    "headerText": "CONNECT",
+    "stopScanning": "Stop Scanning"
   },
   "demoListScreen": {
     "title": "Demo List"
