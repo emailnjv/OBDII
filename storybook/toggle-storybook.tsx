@@ -16,6 +16,17 @@ export function ToggleStorybook(props) {
 	const [showStorybook, setShowStorybook] = useState(false)
 	const [StorybookUIRoot, setStorybookUIRoot] = useState(null)
 
+	Object.defineProperty(global, 'showStorybook', {
+		configurable: true,
+		get() {
+			return showStorybook
+		},
+		set(value) {
+			setShowStorybook(Boolean(value))
+			return Boolean(value)
+		},
+	})
+
 	useEffect(() => {
 		if (__DEV__) {
 			// Load the setting from storage if it's there
@@ -44,6 +55,8 @@ export function ToggleStorybook(props) {
 	}, [])
 
 	if (showStorybook) {
+		console.log("inside")
+
 		return StorybookUIRoot ? <StorybookUIRoot /> : null
 	} else {
 		return props.children

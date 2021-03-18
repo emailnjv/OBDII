@@ -168,6 +168,16 @@ export class Reactotron {
 					RootNavigation.goBack()
 				},
 			})
+			Tron.onCustomCommand({
+				command: 'storybook',
+				handler() {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					global.showStorybook = !global.showStorybook
+				},
+				title: 'Toggle Storybook',
+				description: 'Toggle between app and storybook',
+			})
 
 			// clear if we should
 			if (this.config.clearOnLoad) {
