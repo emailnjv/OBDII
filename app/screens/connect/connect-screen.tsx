@@ -1,79 +1,47 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, TextStyle } from "react-native"
+import { View, SafeAreaView } from "react-native"
 import { Screen, Wallpaper, Header, Button } from "../../components"
 import { useNavigation } from "@react-navigation/native"
-import { color, spacing, typography } from "../../theme"
-import { BleManager } from 'react-native-ble-plx'
+import { color, FULL, CONTAINER, HEADER, HEADER_TITLE, BUTTON, BUTTON_TEXT, FOOTER, FOOTER_CONTENT } from "../../theme"
+import { BleManager, Device } from 'react-native-ble-plx'
 
-const FULL: ViewStyle = { flex: 1 }
-const CONTAINER: ViewStyle = {
-	backgroundColor: color.transparent,
-	paddingHorizontal: spacing[4],
+interface deviceIDMap {
+	id: Device
 }
-const BOLD: TextStyle = { fontWeight: "bold" }
-const TEXT: TextStyle = {
-	color: color.palette.white,
-	fontFamily: typography.primary,
-}
-const HEADER: TextStyle = {
-	paddingTop: spacing[3],
-	paddingBottom: spacing[5] - 1,
-	paddingHorizontal: 0,
-}
-const HEADER_TITLE: TextStyle = {
-	...BOLD,
-	fontSize: 12,
-	lineHeight: 15,
-	textAlign: "center",
-	letterSpacing: 1.5,
-}
-const BUTTON: ViewStyle = {
-	paddingVertical: spacing[4],
-	paddingHorizontal: spacing[4],
-	backgroundColor: "#5D2555",
-}
-const BUTTON_TEXT: TextStyle = {
-	...TEXT,
-	...BOLD,
-	fontSize: 13,
-	letterSpacing: 2,
-}
+
 export const ConnectScreen = observer(function ConnectScreen() {
+	const [devices, deviceSetter] = useState({} as deviceIDMap)
+	const [manager, setManager] = useState({} as BleManager)
 	const navigation = useNavigation()
 	const goBack = () => navigation.goBack()
-	const manager = new BleManager()
 
-	const scanAndConnect = () => {
-		manager.startDeviceScan(null, null, (error, device) => {
-			if (error) {
-				// Handle error (scanning will be stopped automatically)
-				return
-			}
-
-			// Check if it is a device you are looking for based on advertisement data
-			// or other criteria.
-			console.log(device)
-			if (device.name === 'TI BLE Sensor Tag' ||
-				device.name === 'SensorTag') {
-				// Stop scanning as it's not necessary if you are scanning for one device.
-				manager.stopDeviceScan()
-
-				// Proceed with connection.
-			}
-		})
+	const setDevice = (device: Device) => {
+		const newState: deviceIDMap = {
+			...devices,
+		}
+		newState[device.id] = device
+		deviceSetter(newState)
 	}
 	const stopScanning = () => {
 		manager.stopDeviceScan()
 	}
 	useEffect(() => {
-		const subscription = manager.onStateChange((state) => {
-			if (state === 'PoweredOn') {
-				scanAndConnect()
-				subscription.remove()
+		const instantiatedManager = new BleManager()
+		setManager(instantiatedManager)
+
+		instantiatedManager.startDeviceScan(null, null, (error, device) => {
+			if (error) {
+				// Handle error (scanning will be stopped automatically)
+				return
 			}
-		}, true)
-	}, [])
+			setDevice(device)
+			// manager.stopDeviceScan()
+		})
+		return () => {
+			instantiatedManager.destroy()
+		}
+	}, [devices])
 
 	return (
 		<View testID="ConnectScreen" style={FULL}>
@@ -87,14 +55,18 @@ export const ConnectScreen = observer(function ConnectScreen() {
 					style={HEADER}
 					titleStyle={HEADER_TITLE}
 				/>
-				<Button
-					testID="connect-screen-button"
-					style={BUTTON}
-					textStyle={BUTTON_TEXT}
-					tx="connectScreen.stopScanning"
-					onPress={stopScanning}
-				/>
 			</Screen>
+			<SafeAreaView style={FOOTER}>
+				<View style={FOOTER_CONTENT}>
+					<Button
+						testID="connect-screen-button"
+						style={BUTTON}
+						textStyle={BUTTON_TEXT}
+						tx="connectScreen.stopScanning"
+						onPress={stopScanning}
+					/>
+				</View>
+			</SafeAreaView>
 		</View>
 
 	)
