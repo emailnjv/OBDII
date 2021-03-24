@@ -17,6 +17,9 @@ const BOWSER: ImageStyle = {
 	marginVertical: spacing[5],
 	maxWidth: "100%",
 }
+const BUTTON_WRAPPER: ImageStyle = {
+	paddingVertical: spacing[4],
+}
 
 export const WelcomeScreen = observer(function WelcomeScreen() {
 	const navigation = useNavigation()
@@ -46,20 +49,24 @@ export const WelcomeScreen = observer(function WelcomeScreen() {
 			</Screen>
 			<SafeAreaView style={FOOTER}>
 				<View style={FOOTER_CONTENT}>
-					<Button
-						testID="next-screen-button"
-						style={BUTTON}
-						textStyle={BUTTON_TEXT}
-						tx="welcomeScreen.continue"
-						onPress={demoScreen}
-					/>
-					<Button
-						testID="connect-screen-button"
-						style={BUTTON}
-						textStyle={BUTTON_TEXT}
-						tx="welcomeScreen.connect"
-						onPress={connectScreen}
-					/>
+					<View style={BUTTON_WRAPPER}>
+						<Button
+							testID="next-screen-button"
+							style={BUTTON}
+							textStyle={BUTTON_TEXT}
+							tx="welcomeScreen.continue"
+							onPress={demoScreen}
+						/>
+					</View>
+					<View style={BUTTON_WRAPPER}>
+						<Button
+							testID="connect-screen-button"
+							style={BUTTON}
+							textStyle={BUTTON_TEXT}
+							tx="welcomeScreen.connect"
+							onPress={connectScreen}
+						/>
+					</View>
 				</View>
 			</SafeAreaView>
 		</View>

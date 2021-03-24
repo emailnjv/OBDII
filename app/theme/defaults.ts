@@ -3,16 +3,36 @@ import { color } from "./color"
 import { spacing } from "./spacing"
 import { typography } from "./typography"
 
+/*
+* Main Layout
+*/
 export const FULL: ViewStyle = { flex: 1 }
 export const CONTAINER: ViewStyle = {
 	backgroundColor: color.transparent,
 	paddingHorizontal: spacing[4],
 }
+export const FOOTER: ViewStyle = { backgroundColor: "#20162D", marginBottom: 64 }
+export const FOOTER_CONTENT: ViewStyle = {
+	paddingVertical: spacing[4],
+	paddingHorizontal: spacing[4],
+}
+
+/*
+* Base Text Styles
+*/
 export const BOLD: TextStyle = { fontWeight: "bold" }
 export const TEXT: TextStyle = {
 	color: color.palette.white,
 	fontFamily: typography.primary,
 }
+export const BLACK_TEXT: TextStyle = {
+	...TEXT,
+	color: "black"
+}
+
+/*
+* Main Text Styles
+*/
 export const HEADER: TextStyle = {
 	paddingTop: spacing[3],
 	paddingBottom: spacing[5] - 1,
@@ -43,11 +63,11 @@ export const CONTENT: TextStyle = {
 	lineHeight: 22,
 	marginBottom: spacing[5],
 }
-export const FOOTER: ViewStyle = { backgroundColor: "#20162D", marginBottom: 64 }
-export const FOOTER_CONTENT: ViewStyle = {
-	paddingVertical: spacing[4],
-	paddingHorizontal: spacing[4],
-}
+
+/*
+* Common Component Styles
+*/
+// Button
 export const BUTTON: ViewStyle = {
 	paddingVertical: spacing[4],
 	paddingHorizontal: spacing[4],
@@ -58,4 +78,19 @@ export const BUTTON_TEXT: TextStyle = {
 	...BOLD,
 	fontSize: 13,
 	letterSpacing: 2,
+}
+
+// Flat List
+export const LIST_CONTAINER: ViewStyle = {
+	alignItems: "center",
+	flexDirection: "row",
+	padding: 10,
+}
+export const FLAT_LIST: ViewStyle = {
+	paddingHorizontal: spacing[4]
+}
+export const LIST_TEXT: TextStyle = {
+	marginLeft: 10,
+	flexWrap: "wrap",
+	flexShrink: 1,
 }

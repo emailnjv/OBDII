@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { View, SafeAreaView } from "react-native"
-import { Screen, Wallpaper, Header, Button } from "../../components"
+import { Screen, Wallpaper, Header, Button, DeviceConnectList } from "../../components"
 import { useNavigation } from "@react-navigation/native"
-import { color, FULL, CONTAINER, HEADER, HEADER_TITLE, BUTTON, BUTTON_TEXT, FOOTER, FOOTER_CONTENT } from "../../theme"
+import {
+	color,
+	FULL,
+	CONTAINER,
+	HEADER,
+	HEADER_TITLE,
+	BUTTON,
+	BUTTON_TEXT,
+	FOOTER,
+	FOOTER_CONTENT,
+} from "../../theme"
 import { BleManager, Device } from 'react-native-ble-plx'
 
 interface deviceIDMap {
@@ -58,6 +68,7 @@ export const ConnectScreen = observer(function ConnectScreen() {
 			</Screen>
 			<SafeAreaView style={FOOTER}>
 				<View style={FOOTER_CONTENT}>
+					<DeviceConnectList devices={Object.values(devices as unknown as Device[])}/>
 					<Button
 						testID="connect-screen-button"
 						style={BUTTON}
