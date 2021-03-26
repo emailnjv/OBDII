@@ -26,16 +26,6 @@ export const ConnectScreen = observer(function ConnectScreen() {
 	const navigation = useNavigation()
 	const goBack = () => navigation.goBack()
 
-	const setDevice = (device: Device) => {
-		const newState: deviceIDMap = {
-			...devices,
-		}
-		newState[device.id] = device
-		deviceSetter(newState)
-	}
-	const stopScanning = () => {
-		manager.stopDeviceScan()
-	}
 	useEffect(() => {
 		const instantiatedManager = new BleManager()
 		setManager(instantiatedManager)
@@ -46,12 +36,42 @@ export const ConnectScreen = observer(function ConnectScreen() {
 				return
 			}
 			setDevice(device)
-			// manager.stopDeviceScan()
+			if (device.name && device.name === "WH-1000XM3") {
+				console.log("in case")
+			}
 		})
 		return () => {
 			instantiatedManager.destroy()
 		}
 	}, [devices])
+
+	const setDevice = (device: Device) => {
+		const newState: deviceIDMap = {
+			...devices,
+		}
+		newState[device.id] = device
+		deviceSetter(newState)
+	}
+	const stopScanning = () => {
+		manager.stopDeviceScan()
+	}
+	const connectToTarget = async () => {
+		const filteredData = Object.values(devices as unknown as Device[]).filter((device: Device) => device.name && device.name === "LE_WH-1000XM3")
+		if (filteredData.length > 0) {
+			await connectDevice(filteredData[0])
+		}
+	}
+	const connectDevice = async (device: Device): Promise<Device> => {
+		// eslint-disable-next-line no-useless-catch
+		// try {
+		const connectedDevice = await device.connect()
+		const exploredDevice = await connectedDevice.discoverAllServicesAndCharacteristics()
+		console.log(exploredDevice)
+		return exploredDevice
+		// } catch (e) {
+		// 	throw e
+		// }
+	}
 
 	return (
 		<View testID="ConnectScreen" style={FULL}>
@@ -75,6 +95,13 @@ export const ConnectScreen = observer(function ConnectScreen() {
 						textStyle={BUTTON_TEXT}
 						tx="connectScreen.stopScanning"
 						onPress={stopScanning}
+					/>
+					<Button
+						testID="connect-screen-button"
+						style={BUTTON}
+						textStyle={BUTTON_TEXT}
+						tx="Log Data"
+						onPress={connectToTarget}
 					/>
 				</View>
 			</SafeAreaView>

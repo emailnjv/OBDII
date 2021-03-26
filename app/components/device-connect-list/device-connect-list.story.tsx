@@ -101,6 +101,53 @@ export const testDevices = [
 			_errorCodesToMessagesMapping: "{0: \"Unknown error occurred. This is probably a bug…}",
 			_scanEventSubscription: null
 		}
+	},
+	{
+		serviceUUIDs: [
+			"0000fff0-0000-1000-8000-00805f9b34fb"
+		],
+		isConnectable: null,
+		overflowServiceUUIDs: null,
+		txPowerLevel: null,
+		serviceData: null,
+		manufacturerData: null,
+		name: "Carista",
+		mtu: 23,
+		rssi: -57,
+		solicitedServiceUUIDs: null,
+		localName: "Carista",
+		id: "88:2B:99:32:6E:DA",
+		_manager: {
+			_eventEmitter: "{_subscriber: {…}}",
+			_uniqueId: 0,
+			_activePromises: "{}",
+			_activeSubscriptions: "{}",
+			_errorCodesToMessagesMapping: "{0: \"Unknown error occurred. This is probably a bug…}",
+			_scanEventSubscription: null
+		}
+	},
+	{
+		serviceUUIDs: null,
+		isConnectable: null,
+		overflowServiceUUIDs: null,
+		txPowerLevel: null,
+		serviceData: null,
+		manufacturerData: "LQEEAAExAAH+iR6OAGDQAAAAAAAA",
+		name: "WH-1000XM3",
+		mtu: 23,
+		rssi: -47,
+		solicitedServiceUUIDs: null,
+		localName: null,
+		id: "CC:98:8B:21:34:FB",
+		_manager: {
+			_eventEmitter: "{_subscriber: {…}}",
+			_uniqueId: 0,
+			_activePromises: "{}",
+			_activeSubscriptions: "{}",
+			_errorCodesToMessagesMapping: "{0: \"Unknown error occurred. This is probably a bug…}",
+			_scanEventSubscription: null
+		}
+
 	}
 ]
 

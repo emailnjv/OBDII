@@ -26,7 +26,6 @@ export const DeviceConnectList = observer(function DeviceConnectList(props: Devi
 				data={devices}
 				keyExtractor={(item: Device) => item.id}
 				renderItem={({ item }: any) => {
-					console.log(item)
 					return (
 						<View style={LIST_CONTAINER}>
 							<Text style={BLACK_TEXT}>
