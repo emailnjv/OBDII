@@ -55,8 +55,6 @@ export function ToggleStorybook(props) {
 	}, [])
 
 	if (showStorybook) {
-		console.log("inside")
-
 		return StorybookUIRoot ? <StorybookUIRoot /> : null
 	} else {
 		return props.children
