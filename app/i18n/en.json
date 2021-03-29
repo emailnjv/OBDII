@@ -2,7 +2,8 @@
   "common": {
     "ok": "OK!",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "log": "Log Data"
   },
   "errors": {
     "invalidEmail": "Invalid email address."

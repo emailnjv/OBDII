@@ -15,6 +15,7 @@ import {
 	FOOTER_CONTENT,
 } from "../../theme"
 import { BleManager, Device } from 'react-native-ble-plx'
+import { useStores } from "../../models"
 
 interface deviceIDMap {
 	id: Device
@@ -25,6 +26,7 @@ export const ConnectScreen = observer(function ConnectScreen() {
 	const [manager, setManager] = useState({} as BleManager)
 	const navigation = useNavigation()
 	const goBack = () => navigation.goBack()
+	const { deviceConfigStore } = useStores()
 
 	useEffect(() => {
 		const instantiatedManager = new BleManager()
@@ -55,23 +57,26 @@ export const ConnectScreen = observer(function ConnectScreen() {
 	const stopScanning = () => {
 		manager.stopDeviceScan()
 	}
-	const connectToTarget = async () => {
-		const filteredData = Object.values(devices as unknown as Device[]).filter((device: Device) => device.name && device.name === "LE_WH-1000XM3")
-		if (filteredData.length > 0) {
-			await connectDevice(filteredData[0])
-		}
+	// const connectToTarget = async () => {
+	// 	const filteredData = Object.values(devices as unknown as Device[]).filter((device: Device) => device.name && device.name === "LE_WH-1000XM3")
+	// 	if (filteredData.length > 0) {
+	// 		await connectDevice(filteredData[0])
+	// 	}
+	// }
+	const log = () => {
+		console.log(deviceConfigStore.getSelectedDevice)
 	}
-	const connectDevice = async (device: Device): Promise<Device> => {
-		// eslint-disable-next-line no-useless-catch
-		// try {
-		const connectedDevice = await device.connect()
-		const exploredDevice = await connectedDevice.discoverAllServicesAndCharacteristics()
-		console.log(exploredDevice)
-		return exploredDevice
-		// } catch (e) {
-		// 	throw e
-		// }
-	}
+	// const connectDevice = async (device: Device): Promise<Device> => {
+	// 	// eslint-disable-next-line no-useless-catch
+	// 	// try {
+	// 	const connectedDevice = await device.connect()
+	// 	const exploredDevice = await connectedDevice.discoverAllServicesAndCharacteristics()
+	// 	console.log(exploredDevice)
+	// 	return exploredDevice
+	// 	// } catch (e) {
+	// 	// 	throw e
+	// 	// }
+	// }
 
 	return (
 		<View testID="ConnectScreen" style={FULL}>
@@ -100,8 +105,8 @@ export const ConnectScreen = observer(function ConnectScreen() {
 						testID="connect-screen-button"
 						style={BUTTON}
 						textStyle={BUTTON_TEXT}
-						tx="Log Data"
-						onPress={connectToTarget}
+						tx="common.log"
+						onPress={log}
 					/>
 				</View>
 			</SafeAreaView>
